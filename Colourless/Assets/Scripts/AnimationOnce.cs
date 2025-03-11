@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class AnimationOnce : MonoBehaviour
@@ -6,35 +5,38 @@ public class AnimationOnce : MonoBehaviour
     public Sprite[] sprites;
     private SpriteRenderer spriteRenderer;
     private int frameIndex = 0;
-    public int frameRate = 4; // Frames per second
+    public int frameRate = 8; // Frames per second
 
-    private int timer = 0;
+    private float timer = 0f; // Changed to float
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sprites[0]; // Set initial sprite
+        if (sprites.Length > 0)
+        {
+            spriteRenderer.sprite = sprites[0]; // Set initial sprite
+        }
     }
 
     void Update()
     {
-        timer++;
-
-        if (timer == frameRate)
-        {
-            timer = 0;
-            frameIndex++;
-        }
-
-        if (frameIndex < sprites.Length)
-        {
-            spriteRenderer.sprite = sprites[frameIndex];
-        }
-
-        if (frameIndex >= sprites.Length)
+        if (frameIndex >= sprites.Length) // If animation is done, destroy object
         {
             Destroy(gameObject);
+            return;
         }
-        
+
+        timer += Time.deltaTime;
+
+        if (timer >= (1f / frameRate)) // Change frame every (1 / frameRate) seconds
+        {
+            timer = 0f;
+            frameIndex++;
+
+            if (frameIndex < sprites.Length)
+            {
+                spriteRenderer.sprite = sprites[frameIndex];
+            }
+        }
     }
 }

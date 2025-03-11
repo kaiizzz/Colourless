@@ -11,7 +11,7 @@ public class UpDownPlatform : MonoBehaviour
     public ColorRestoration2D colourRestoration;
 
     private bool isMovingUp = true;
-    private float speed = 0.1f;  // Adjust speed as needed
+    private float speed = 0.2f;  // Adjust speed as needed
 
     private void Update()
     {

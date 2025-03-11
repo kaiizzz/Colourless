@@ -11,6 +11,10 @@ TagManager:
   - UpDown
   - TriggerNextLevel1
   - Corrosion
+  - Alter
+  - ConveyerBelt
+  - BlastEnergy
+  - NextLevelTrigger2
   layers:
   - Default
   - TransparentFX

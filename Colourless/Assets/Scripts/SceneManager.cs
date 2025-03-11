@@ -16,7 +16,7 @@ public class SceneManagerSingleton : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            
         }
         else
         {
@@ -105,5 +105,10 @@ public class SceneManagerSingleton : MonoBehaviour
         }
         tempColor.a = 0;
         fadeCanvas.color = tempColor;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

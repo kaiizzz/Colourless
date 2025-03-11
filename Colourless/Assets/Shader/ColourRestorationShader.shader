@@ -11,10 +11,12 @@ Shader "Custom/ColorRestorationFilter"
     SubShader
     {
         Tags { "RenderType"="Transparent" }
+        Cull Off
         Pass
         {
             Blend SrcAlpha OneMinusSrcAlpha  // Ensures proper blending
             CGPROGRAM
+            
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
@@ -54,9 +56,9 @@ Shader "Custom/ColorRestorationFilter"
                 // Convert color to greyscale for the default state
                 float grayscale = dot(texColor.rgb, float3(0.3, 0.59, 0.11));
                 fixed4 greyTex = fixed4(grayscale, grayscale, grayscale, texColor.a);
-                fixed4 blueTex = fixed4(0, texColor.g, texColor.b, texColor.a);
-                fixed4 greenTex = fixed4(texColor.r, 0, texColor.b, texColor.a);
-                fixed4 redTex = fixed4(texColor.r, texColor.g, 0, texColor.a);
+                fixed4 blueTex = fixed4(0, 0, texColor.b, texColor.a);
+                fixed4 greenTex = fixed4(0, texColor.g, texColor.b, texColor.a);
+                fixed4 redTex = fixed4(texColor.r, texColor.g, texColor.b, texColor.a);
                 fixed4 fullTex = texColor;
 
                 // Distance from the player
